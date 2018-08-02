@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<ruleset name="Default Generic">
+	<description>To avoid those annoying rules I never want running</description>
+	
+	<!-- Check all files -->
+	<file>./</file>
+
+	<!-- Reporting: Because we want to trace the sniff in most cases -->
+	<arg value="s" />
+
+	<rule ref="PEAR">
+		<!-- Missing @link tag in file comment -->
+		<exclude name="PEAR.Commenting.FileComment.MissingLinkTag" />
+		<exclude name="PEAR.Commenting.FileComment.InvalidAuthors" />
+		<exclude name="PEAR.Commenting.ClassComment.MissingAuthorTag" />
+		<exclude name="PEAR.Commenting.ClassComment.MissingCategoryTag" />
+		<exclude name="PEAR.Commenting.ClassComment.MissingPackageTag" />
+		<exclude name="PEAR.Commenting.ClassComment.MissingLicenseTag" />
+		<exclude name="PEAR.Commenting.ClassComment.MissingLinkTag" />
+        
+		<exclude name="PEAR.Commenting.FunctionComment.SpacingAfterParamType" />
+		<exclude name="PEAR.Commenting.FunctionComment.SpacingAfterParamName" />
+		
+		<!-- Opening brace should be on a new line -->
+		<exclude name="PEAR.Classes.ClassDeclaration.OpenBraceNewLine" />
+		<exclude name="PEAR.Functions.FunctionDeclaration.BraceOnSameLine" />
+		
+		<!-- Expected 0 spaces before closing bracket; 1 found -->
+		<exclude name="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket" />
+		<exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket" />
+
+		<!-- Expected "if (...) {\n"; found "if(...) {\n" -->
+		<exclude name="PEAR.ControlStructures.ControlSignature.Found" />
+		
+		<!-- First condition of a multi-line IF statement must directly follow the opening parenthesis -->
+		<exclude name="PEAR.ControlStructures.MultiLineCondition.SpacingAfterOpenBrace" />
+	</rule>
+
+	<rule ref="Generic">
+		<!-- Line indented incorrectly; expected 4 spaces, found 1 -->
+		<exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
+        
+		<exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen" />
+		<exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceBeforeClose" />
+		<exclude name="Generic.Arrays.ArrayIndent.KeyIncorrect" />
+
+		<!-- TRUE, FALSE and NULL must be uppercase; expected "FALSE" but found "false" -->
+		<exclude name="Generic.PHP.UpperCaseConstant.Found" />
+		<exclude name="Generic.PHP.ClosingPHPTag" />
+
+		<!-- Short array syntax must be used to define arrays -->
+		<exclude name="Generic.Arrays.DisallowLongArraySyntax.Found" />
+
+		<!-- Inline control structures are discouraged -->
+		<exclude name="Generic.ControlStructures.InlineControlStructure.Discouraged" />
+
+		<exclude name="Generic.Files.LineLength.TooLong" />
+		<exclude name="Generic.Files.EndFileNoNewline.Found" />
+
+		<exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman.BraceOnSameLine" />
+
+		<exclude name="Generic.Commenting.DocComment.ShortNotCapital" />
+		<exclude name="Generic.Commenting.DocComment.SpacingBeforeTags" />
+		<exclude name="Generic.Commenting.DocComment.TagValueIndent" />>
+		<exclude name="Generic.Commenting.DocComment.NonParamGroup" />
+		<exclude name="Squiz.Commenting.DocCommentAlignment.SpaceAfterStar" />
+
+		<exclude name="Generic.NamingConventions.CamelCapsFunctionName.NotCamelCaps" />
+		<exclude name="Squiz.Commenting.DocCommentAlignment.SpaceBeforeStar" />
+
+	</rule>
+
+	<!-- <rule ref="Squiz">
+		<exclude name="Squiz.Commenting.DocCommentAlignment" />
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+		<exclude name="Squiz.Commenting.DocCommentAlignment.SpaceBeforeStar" />
+	</rule> -->
+</ruleset>
