@@ -1,11 +1,11 @@
 <?php
 /**
- *    PHP Fix My Files
+ *    Fix My Files
  *    @category    FileFormatter
  *    @package    FixMyFiles
  *    @author        Thapelo Moeti
  *    @license    MIT (http://url.com/)
- *    @version    1.0.0
+ *    @version    1.0.1
  */
 
 require_once 'fixmyfiles.php';
@@ -36,7 +36,7 @@ $options = getopt( $shortopt, $longopt );
 $_options = array();
 
 // Let the user know we are running
-echo "Running Fix My Files v0.1\n";
+echo "Running Fix My Files v1.0.1\n";
 
 // Are we converting tabs to spaces?
 if( isset( $options[ 'tab-to-space' ] ) ) {
@@ -80,7 +80,10 @@ if( $_argv ) {
     $fixmyfiles = new FixMyFiles( $_options );
     $fixed = $fixmyfiles->fix();
 
-    echo "\n--Fixed: ", count( $fixed );
+    echo "\n--Fixed ", count( $fixed ), ' file(s)';
+
+    foreach( $fixed as $file )
+        echo "\n# {$file}";
 }
 
 echo "\n\nEnd of Fix My Files Script";
