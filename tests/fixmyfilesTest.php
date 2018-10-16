@@ -115,6 +115,19 @@ class FixMyFilesTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
+     *  Testing trimming of whitespace
+     */
+    public function testTrimWhitespace() {
+        $trimWhitespace = new ReflectionMethod( 'FixMyFiles', 'trimWhitespace' );
+
+        $trimWhitespace->setAccessible( true );
+
+        $expected = "Hello\n World\n";
+
+        $this->assertEquals( $expected, $trimWhitespace->invoke( new FixMyFiles, "Hello  \n World  \n  "), 'trimWhitespace Failed!' );
+    }
+
+    /**
      *    Testing the setPath function
      */
     public function testSetPath() {
@@ -128,9 +141,9 @@ class FixMyFilesTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     *  Test the fix function. Defaults to tabs to spaces
+     *  Test the fix function (with mock file). Defaults to tabs to spaces
      */
-    public function testFix() {
+    public function testFixWithTabs() {
         $expected = str_replace( "\t", "    ", "This\tfile\n\tHas\n\t\tTabs" );
 
         $f1_name = 'mock-files/with-tabs.php';
@@ -141,10 +154,10 @@ class FixMyFilesTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     *  Test the fix function when converting spaces to tabs
+     *  Test the fix function (with mock file) when converting spaces to tabs
      */
-    public function testFixSpaceToTab() {
-        $expected = str_replace( "    ", "\t", "This    File\n    Has  Too\n\nMany    \n        Spaces" );
+    public function testFixWithSpaces() {
+        $expected = str_replace( "    ", "\t", "This    File\n    Has  Too\n\nMany\n        Spaces" );
         $filename = realpath( 'mock-files/with-spaces.php' );
         $options = array( 'path' => $filename, 'spaceToTab' => true );
         $fixmyfiles = new FixMyFiles( $options );
@@ -155,9 +168,9 @@ class FixMyFilesTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     *  Test the fix function when converting to windows line endings
+     *  Test the fix function (with mock file) when converting to windows line endings
      */
-    public function testFixWindowsEnding() {
+    public function testFixWithWindowsEnding() {
         $expected = str_replace( "\n", "\r\n", "This file must\nhave Windows\nline endings\n\n" );
         $filename = realpath( 'mock-files/with-windows-endings.php' );
         $options = array( 'path' => $filename, 'toWindowsEnding' => true );
@@ -169,9 +182,9 @@ class FixMyFilesTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     *  Test the fix function when converting to unix line endings
+     *  Test the fix function (with mock file) when converting to unix line endings
      */
-    public function testFixUnixEnding() {
+    public function testFixWithUnixEnding() {
         $expected = "This file\nmust have Unix\nline endings\n\n";
         $filename = realpath( 'mock-files/with-unix-endings.php' );
         $options = array( 'path' => $filename );

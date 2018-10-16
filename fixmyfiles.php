@@ -5,7 +5,7 @@
  *    @package    FixMyFiles
  *    @author        Thapelo Moeti
  *    @license    MIT (http://url.com/)
- *    @version    1.0.0
+ *    @version    1.0.1
  */
 
 // 1. get file content
@@ -119,6 +119,9 @@ class FixMyFiles {
 
             $content = file_get_contents( $file );
 
+            // always trim whitespaces
+            $content = $this->trimWhitespace( $content );
+
             foreach( $this->_callList as $func )
                 $content = call_user_func( array( $this, $func ), $content );
 
@@ -226,6 +229,26 @@ class FixMyFiles {
         $text = str_replace( "\n", "\r\n", $text );
 
         return $text;
+    }
+
+    /**
+    *    Trim whitespaces at the end of the line
+    *
+    *    @param    string    $text    The text to be formatted
+    *    @return    string    $text    The formatted text
+    */
+    protected function trimWhitespace( $text ) {
+        $text = explode( "\n", $text );
+
+        $formatted = array();
+
+        foreach( $text as $line ) {
+            $formatted[] = rtrim( $line );
+        }
+
+        $formatted = implode( "\n", $formatted );
+
+        return $formatted;
     }
 
     /**
